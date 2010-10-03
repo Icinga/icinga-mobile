@@ -1,0 +1,22 @@
+#!/bin/sh
+java -jar compiler.jar \
+	--warning_level=QUIET \
+	--compilation_level=ADVANCED_OPTIMIZATIONS \
+	--js_output_file=/var/www/senchatest/deploy/IcingaMobile-compiled.js \
+	--js=/var/www/senchatest/lib/Model/IcingaFieldConverter.js \
+	--js=/var/www/senchatest/lib/View/Templates/Host.js \
+	--js=/var/www/senchatest/lib/View/Templates/Service.js \
+	--js=/var/www/senchatest/lib/Model/IcingaApiStore.js \
+	--js=/var/www/senchatest/lib/Model/IcingaApiDataView.js \
+	--js=/var/www/senchatest/lib/Model/IcingaConfiguration.js \
+	--js=/var/www/senchatest/lib/Model/IcingaMessageBus.js \
+	--js=/var/www/senchatest/lib/Model/Template/DetailParser.js \
+	--js=/var/www/senchatest/lib/View/GenericView.js \
+	--js=/var/www/senchatest/lib/View/ConfigView.js \
+	--js=/var/www/senchatest/lib/View/Sheets/SortSheet.js \
+	--js=/var/www/senchatest/lib/View/Sheets/DetailSheet.js \
+	--js=/var/www/senchatest/lib/View/Dock/FilterToolBar.js \
+	--js=/var/www/senchatest/lib/View/Dock/PagerBottomBar.js \
+	--js=/var/www/senchatest/lib/index.js \
+	--externs=/var/www/senchatest/lib/sencha/ext-touch-debug.js \
+	--externs=icingaTouchExtern.js

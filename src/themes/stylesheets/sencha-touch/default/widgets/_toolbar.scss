@@ -1,0 +1,68 @@
+@import '../global';
+
+@mixin sencha-toolbar {
+  $toolbar_height: 2.4em;
+  $toolbar_spacing: .2em;
+  $toolbar_border_color: darken($base_color, 50%);
+
+  .x-toolbar {
+    height: $toolbar_height;
+    padding: 0 $toolbar_spacing;
+    overflow: hidden;
+    position: relative;
+    @include bg_gradient(darken($base_color, 20%));
+
+    & > * {
+      z-index: 1;
+    }
+
+    .x-toolbar-title {
+      z-index: 0;
+      @include stretch;
+      text-align: center;
+      line-height: $toolbar_height - .5em;
+      font-weight: bold;
+      font-size: 1.2em;
+      @if $include_highlights {
+        @include bevel_text;
+      }
+      color: #fff;
+    }
+    
+    &.x-docked-top {
+      border-bottom: 1px solid $toolbar_border_color;
+    }
+
+    &.x-docked-bottom {
+      border-top: 1px solid $toolbar_border_color;
+    }
+  }
+
+  .x-toolbar-light {
+    @include bg_gradient($base_color);
+  }
+
+  .x-toolbar-metal {
+    @include bg_gradient(#999);
+    color: #555;
+    @if $include_highlights {
+      text-shadow: rgba(#fff, .5) 0 1px 0;
+    }
+  }
+
+  .x-floating .x-toolbar:first-child {
+    border-bottom: 0;
+    @include border-top-radius(4px);
+
+    &.x-toolbar-dark {
+      background: darken($base_color, 30%);
+      border-top: 1px solid darken($base_color, 25%);
+    }
+
+    &.x-toolbar-light {
+      $lightbg: lighten($base_color, 15%);
+      @include bg_gradient($lightbg);
+      border-top: 1px solid $lightbg;
+    }
+  }
+}

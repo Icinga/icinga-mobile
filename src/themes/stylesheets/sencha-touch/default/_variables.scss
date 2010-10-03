@@ -1,0 +1,31 @@
+$theme_name: 'default';
+
+$include_html_style: true;
+$include_all_icons: true; // To install icons 1 at a time, set this to false then include something like $include_action_icon: true;
+$include_form_sliders: true;
+
+// These are the only variables which drive the theme color scheme
+$base_color: #647482 !default;
+$alert_color: red !default;
+$bright_color: #92cf00 !default;
+
+// These are created automatically from the above,
+// but can also be set to explicit values
+$active_color: darken(saturate($base_color, 55%), 5%) !default;
+$complement: complement($base_color) !default;
+$complement_light: lighten($complement, 40%) !default;
+
+$default_gradient: 'matte' !default;
+$button_gradient: 'matte' !default;
+$include_highlights: true;
+
+$input_radius: .2em !default;
+$txtheight: 2.5em !default;
+$txtareaheight: 6em !default;
+
+$thumbsize: $txtheight;
+$togglesize: $thumbsize - .3em;
+$checkheight: $thumbsize - 1em;
+
+$labelwidth: 7em;
+$spacing: .3em;

@@ -1,0 +1,357 @@
+// Toolbar icons used with permission from Drew Wilson
+// http://pictos.drewwilson.com/
+// Pictos icons are (c) 2010 Drew Wilson
+
+@import '../global';
+
+$button_height: 1.8em;
+$button_radius: .4em;
+
+@mixin toolbar_mask_icon($name) {
+  @if $name {
+    &.#{$name} {
+      -webkit-mask-box-image: theme_image($theme_name, "toolbaricons/" + $name + ".png");
+    }
+  }
+}
+
+.xbase_button_span {
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  line-height: 1.5em;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+@mixin sencha-buttons {
+  
+  $include_action_icon: $include_all_icons !default;
+  $include_add_icon: $include_all_icons !default;
+  $include_arrow_down_icon: $include_all_icons !default;
+  $include_arrow_left_icon: $include_all_icons !default;
+  $include_arrow_right_icon: $include_all_icons !default;
+  $include_arrow_up_icon: $include_all_icons !default;
+  $include_attachment_icon: $include_all_icons !default;
+  $include_bolt_icon: $include_all_icons !default;
+  $include_bookmarks_icon: $include_all_icons !default;
+  $include_chat_icon: $include_all_icons !default;
+  $include_compose_icon: $include_all_icons !default;
+  $include_delete_icon: $include_all_icons !default;
+  $include_home_icon: $include_all_icons !default;
+  $include_locate_icon: $include_all_icons !default;
+  $include_bolt_icon: $include_all_icons !default;
+  $include_maps_icon: $include_all_icons !default;
+  $include_organize_icon: $include_all_icons !default;
+  $include_refresh_icon: $include_all_icons !default;
+  $include_reply_icon: $include_all_icons !default;
+  $include_search_icon: $include_all_icons !default;
+  $include_sort_icon: $include_all_icons !default;
+  $include_star_icon: $include_all_icons !default;
+  $include_settings_icon: $include_all_icons !default;
+  $include_tag_icon: $include_all_icons !default;
+  $include_trash_icon: $include_all_icons !default;
+  
+  // Basic button style
+  .x-button {
+    @include background-clip(padding-box);
+    @include border-radius($button_radius);
+    height: $button_height;
+    line-height: 1.5em;
+    padding: .1em .6em;
+    vertical-align: middle;
+    position: relative;
+    border: 1px solid #ccc;
+    color: #333;
+    display: block;
+    @include toolbar_button(#ccc);
+    @include bevel_text('light');
+    overflow: hidden;
+
+    span {
+      @extend .xbase_button_span;
+      width: 100%;
+    }
+    
+    &.x-item-disabled {
+      color: #999;
+    }
+
+    &.x-button-action, &.x-button-drastic, &.x-button-action_round, &.x-button-drastic_round, &.x-button-action_small, &.x-button-drastic_small {
+      color: #fff;
+      @include toolbar_button(desaturate(darken($alert_color, 10%), 5%));
+      @include bevel_text();
+      
+      &.x-item-disabled {
+        color: rgba(255,255,255,.6);
+      }
+    }
+    
+    &.x-button-action, &.x-button-action_round, &.x-button-action_small {
+      @include toolbar_button(desaturate(darken($bright_color, 10%), 5%));
+    }
+
+    &.x-button-round, &.x-button-action_round, &.x-button-drastic_round {
+      @include border-radius($button_height/2);
+      padding: .1em $button_height/2;
+    }
+    
+    &.x-button-small, &.x-button-action_small, &.x-button-drastic_small {
+      @include border-radius(.3em);
+      padding: .3em .4em;
+      height: 1.3em;
+      line-height: .8em;
+
+      span {
+        font-size: .7em;
+        line-height: 1em;
+      }
+    }
+  }
+
+  .x-toolbar .x-button {
+    @include bevel_text();
+    @include toolbar_button(darken($base_color, 15%));
+    margin: 0 .2em;
+    padding: .3em .6em;
+    
+    img {
+      display: inline-block;
+      height: 24px; // ?
+      width: 40px; // ?
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    span {
+      color: #fff;
+      font-size: .7em;
+      line-height: 1.6em;
+    }
+
+    &.x-item-disabled span {
+      color: lighten($base_color, 20%);
+    }
+  }
+
+  .x-toolbar-light .x-button {
+    @include toolbar_button(darken($base_color, 5%));
+  }
+
+  .x-toolbar-metal .x-button {
+    @include toolbar_button(#999);
+  }
+
+  .x-toolbar-translucent .x-button {
+    @include toolbar_button(rgba(#000,.3));
+  }
+
+  .x-toolbar {
+
+    .x-button-pressed {
+      @include bg_gradient(darken($base_color, 30%), 'recessed');
+    }
+
+    .x-button-round {
+      @include border-radius($button_height/2);
+      padding-left: $button_height/2;
+      padding-right: $button_height/2;
+    }
+
+    .x-button-action {
+      @include bg_gradient($active_color);
+
+      &.x-button-pressed {
+        @include bg_gradient(darken($active_color, 10%), 'recessed');
+      }
+    }
+
+    $tipgap: .06em; // Space between tip and its shadow
+    $vertical_gap: .22em;
+    $overlap_width: .15em; // pushing into the button
+    
+    $mask_height: $button_height - $vertical_gap;
+    $mask_width: $mask_height/2.33;
+    
+    $tip_width: $mask_width + $tipgap;
+    $tip_height: $button_height;
+    
+
+    .x-button-forward, .x-button-back {
+      overflow: visible;
+      &:before, &:after {
+        @include insertion($tip_width, $mask_height, 0, auto);
+        -webkit-mask: $overlap_width $vertical_gap/2 theme_image($theme_name, "tip.png") no-repeat;
+        -webkit-mask-size: $mask_width $mask_height;
+        overflow: hidden;
+      }
+    }
+
+    .x-button-back {
+      margin-left: $tip_width;
+      padding-left: .4em;
+
+      &:before {
+        left: - $tip_width;
+      }
+      &:after {
+        left: - $tip_width + $tipgap;
+      }
+    }
+
+    .x-button-forward {
+      margin-right: $tip_width - $tipgap;
+      padding-right: .4em;
+      
+      &:before {
+        -webkit-transform: rotateY(180deg);
+        right: - $tip_width;
+      }
+      &:after {
+        -webkit-transform: rotateY(180deg);
+        right: - $tip_width + $tipgap;
+      }
+    }
+  }
+
+  .x-button-plain, .x-toolbar .x-button-plain,
+  .x-button-plain.x-button-pressed, .x-toolbar .x-button-mask, .x-button-mask {
+    background: none;
+    border: 0px none;
+    @include box-shadow(none);
+    text-shadow: none;
+    @include border-radius(none);
+    height: auto;
+    color: inherit;
+    line-height: auto;
+
+    &.x-button-mask {
+      margin: -1.5em -.5em;
+      padding: 1.5em 1em;
+      height: 1.8em;
+
+      &.x-item-disabled {
+        opacity: .5;
+      }
+
+      img {
+        position: relative;
+        margin: -.75em 0 0 0;
+        width: 1.5em;
+        height: 1.5em;
+        display: block;
+        overflow: visible;
+        @include bg_gradient($base_color, 'glossy');
+
+        @if $include_action_icon { @include toolbar_mask_icon('action'); }
+        @if $include_add_icon { @include toolbar_mask_icon('add'); }
+        @if $include_arrow_down_icon { @include toolbar_mask_icon('arrow_down'); }
+        @if $include_arrow_left_icon { @include toolbar_mask_icon('arrow_left'); }
+        @if $include_arrow_right_icon { @include toolbar_mask_icon('arrow_right'); }
+        @if $include_arrow_up_icon { @include toolbar_mask_icon('arrow_up'); }
+        @if $include_attachment_icon { @include toolbar_mask_icon('attachment'); }
+        @if $include_bolt_icon { @include toolbar_mask_icon('bolt'); }
+        @if $include_bookmarks_icon { @include toolbar_mask_icon('bookmarks'); }
+        @if $include_chat_icon { @include toolbar_mask_icon('chat'); }
+        @if $include_compose_icon { @include toolbar_mask_icon('compose'); }
+        @if $include_delete_icon { @include toolbar_mask_icon('delete'); }
+        @if $include_home_icon { @include toolbar_mask_icon('home'); }
+        @if $include_locate_icon { @include toolbar_mask_icon('locate'); }
+        @if $include_bolt_icon { @include toolbar_mask_icon('bolt'); }
+        @if $include_maps_icon { @include toolbar_mask_icon('maps'); }
+        @if $include_organize_icon { @include toolbar_mask_icon('organize'); }
+        @if $include_refresh_icon { @include toolbar_mask_icon('refresh'); }
+        @if $include_reply_icon { @include toolbar_mask_icon('reply'); }
+        @if $include_search_icon { @include toolbar_mask_icon('search'); }
+        @if $include_settings_icon { @include toolbar_mask_icon('settings'); }
+        @if $include_sort_icon { @include toolbar_mask_icon('sort'); }
+        @if $include_star_icon { @include toolbar_mask_icon('star'); }
+        @if $include_tag_icon { @include toolbar_mask_icon('tag'); }
+        @if $include_trash_icon { @include toolbar_mask_icon('trash'); }
+      }
+
+      &.x-button-pressed {
+        background: none;
+        -webkit-box-shadow: none;
+        img {
+          @include bg_gradient($active_color);
+        }
+      }
+    }
+  }
+
+  .x-toolbar {
+    .x-button.x-button-mask {
+      overflow: visible;
+      img {
+        @include bg_gradient(lighten($base_color, 50%));
+      }
+      &.x-button-pressed {
+        $mask_radial_glow: lighten($active_color, 50%);
+        @include radial-gradient(color-stops(fade-out($mask_radial_glow, .3), fade-out($mask_radial_glow, 1) 24px));
+        img {
+          @include bg_gradient(lighten($base_color, 50%), 'recessed');
+        }
+      }
+    }
+  }
+  
+  .x-splitbutton .x-button {
+    @include border-radius(0);
+    margin: 0;
+    &:first-child {
+      @include border-left-radius($button_radius);
+    }
+    &:last-child {
+      @include border-right-radius($button_radius);
+    }
+    &:not(:first-child) {
+      border-left: 0;
+    }
+  }
+  
+  $disclosure_size: 1em;
+  
+  .x-disclosure {
+    -webkit-mask-box-image: theme_image($theme_name, "disclosure.png");
+    @include bg_gradient(saturate($active_color, 10%));
+    width: 30px;
+    height: 30px;
+  }
+
+  $badge_size: 2em;
+
+  .x-hasbadge {
+    overflow: visible;
+
+    span.x-badge {
+      @extend .xbase_button_span;
+      @include border-radius($badge_size/2);
+      @include background-clip(padding-box);
+      padding: 1px 5px;
+      z-index: 30;
+      @if $include_highlights {
+        -webkit-box-shadow: #000 0 1px 3px;
+        text-shadow: rgba(0,0,0,.5) 0 -1px 0;
+      }
+      
+
+      color: #fff;
+      border: 2px solid #fff;
+      position: absolute;
+      width: auto;
+      min-width: $badge_size;
+      height: $badge_size;
+      line-height: 1.2em;
+      font-size: .6em;
+      top: -2px;
+      right: 0px;
+      max-width: 40px;
+
+      @include bg_gradient(darken($alert_color, 20%), 'glossy');
+      display: inline-block;
+    }
+  }
+}

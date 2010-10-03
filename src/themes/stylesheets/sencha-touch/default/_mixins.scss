@@ -1,0 +1,96 @@
+@import 'compass/css3';
+
+// options: matte, bevel, glossy, recessed, flat
+@mixin bg_gradient($bg_color, $type: $default_gradient) {
+  @if $include_highlights {
+    @if $type == flat {
+      background-color: $bg_color;
+    } @else if $type == bevel {
+      @include linear-gradient(color_stops(lighten($bg_color, 30%), lighten($bg_color, 15%) 2%, lighten($bg_color, 8%) 30%, $bg_color 65%, saturate(darken($bg_color, 10%), 10%)));
+    } @else if $type == glossy {
+      @include linear-gradient(color_stops(lighten($bg_color, 40%), lighten($bg_color, 12%) 2%, lighten($bg_color, 13%) 50%, lighten($bg_color, 10%) 51%, $bg_color));
+    } @else if $type == recessed {
+      @include linear-gradient(color_stops($bg_color, darken($bg_color, 10%) 4%, darken($bg_color, 5%) 10%, $bg_color 65%, lighten($bg_color, .5%)));
+    } @else { // type=matte
+      @include linear-gradient(color_stops(lighten($bg_color, 30%), lighten($bg_color, 10%) 2%, darken($bg_color, 5%)));
+    }
+  } @else {
+    background-color: $bg_color;
+  }
+
+}
+
+// The toolbar button mixin adds background colors and borders
+// as well as styles the rounded and back/forward button types
+@mixin toolbar_button($bgcolor, $type: $button_gradient){
+  border: 1px solid darken($bgcolor, 20%);
+  border-top-color: darken($bgcolor, 15%);
+  
+  &.x-button-back:before, &.x-button-forward:before {
+    background: darken($bgcolor, 20%);
+  }
+  
+  &, &.x-button-back:after, &.x-button-forward:after {
+    @include bg_gradient($bgcolor, $button_gradient);
+  }
+  
+  @if $include_highlights {
+    -webkit-box-shadow: inset rgba(#fff, .2) 0 .1em .1em, rgba(#fff, .1) 0 .1em 0;
+  }
+
+  &.x-button-pressed, &.x-button-active {
+    @include bg_gradient(darken($bgcolor, 7%), 'recessed');
+
+    &.x-button-back:after, &.x-button-forward:after {
+      @include bg_gradient(darken($bgcolor, 7%), 'recessed');
+    }
+    
+    @if $include_highlights {
+      -webkit-box-shadow: inset saturate(darken($bgcolor, 15%), 5%) 0 0 .1em, rgba(#fff, .1) 0 .1em 0;
+      
+      &.x-button-back:before {
+        -webkit-box-shadow: inset lighten($bgcolor, 5%) 0 0 .1em .1em;
+      }
+      &.x-button-forward:before {
+        -webkit-box-shadow: inset lighten($bgcolor, 5%) 0 0 -.1em .1em;
+      }
+    }
+  }
+}
+
+@mixin bevel_text($type: 'shadow') {
+  @if $include_highlights {
+    @if $type == shadow {
+      text-shadow: rgba(0,0,0,.5) 0 -.08em 0;
+    } @else {
+      text-shadow: rgba(255,255,255,.25) 0 .08em 0;
+    }
+  }
+}
+
+@mixin bevel_box($type: 'light') {
+  @if $include_highlights {
+    @if $type == shadow {
+      -webkit-box-shadow: rgba(#000, .5) 0 -.06em 0;
+    } @else {
+      -webkit-box-shadow: rgba(#fff, .35) 0 .06em 0;
+    }
+  }
+}
+
+@mixin insertion($width: 30px, $height: 30px, $top: 0, $left: 0) {
+  content: "\00a0";
+  position: absolute;
+  width: $width;
+  height: $height;
+  top: $top;
+  left: $left;
+}
+
+@mixin stretch {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

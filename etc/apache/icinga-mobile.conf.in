@@ -1,0 +1,14 @@
+#
+# icinga-mobile apache configuration
+#
+
+Alias @web_path@ @prefix@/
+
+<Directory @prefix@/>
+	DirectoryIndex index.php
+	Options FollowSymLinks
+	AllowOverride all
+	Order allow,deny
+	Allow from all
+</Directory>
+

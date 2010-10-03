@@ -1,0 +1,90 @@
+#!/bin/sh
+
+HTMLDIR=@prefix@
+VERSION_MAJOR=0
+VERSION_MINOR=1
+VERSION_PATCH=1
+WEB_APACHE_PATH=@web_apache_path@
+INSTALL=@INSTALL@
+INSTALL_OPTS=@INSTALL_OPTS@
+
+compile:
+	java -jar bin/closure/compiler.jar \
+		--warning_level=QUIET \
+		--compilation_level=ADVANCED_OPTIMIZATIONS \
+		--js_output_file=deploy/IcingaMobile-compiled.js \
+		--js=lib/Model/IcingaFieldConverter.js \
+		--js=lib/View/Templates/Host.js \
+		--js=lib/View/Templates/Service.js \
+		--js=lib/Model/IcingaApiStore.js \
+		--js=lib/Model/IcingaApiDataView.js \
+		--js=lib/Model/IcingaConfiguration.js \
+		--js=lib/Model/IcingaCommandSender.js \
+		--js=lib/Model/IcingaMessageBus.js \
+		--js=lib/Model/Template/DetailParser.js \
+		--js=lib/View/Commands/Definitions.js \
+		--js=lib/View/GenericView.js \
+		--js=lib/View/ConfigView.js \
+		--js=lib/View/CommandSelectionView.js \
+		--js=lib/View/CommandDetailView.js \
+		--js=lib/View/Sheets/SortSheet.js \
+		--js=lib/View/Sheets/DetailSheet.js \
+		--js=lib/View/Dock/FilterToolBar.js \
+		--js=lib/View/Dock/PagerBottomBar.js \
+		--js=lib/index.js \
+		--externs=lib/sencha/ext-touch-debug.js \
+		--externs=bin/closure/icingaTouchExtern.js
+
+compile-debug:
+	java -jar bin/closure/compiler.jar \
+		--compilation_level=ADVANCED_OPTIMIZATIONS \
+		--formatting=PRETTY_PRINT \
+		--js_output_file=deploy/IcingaMobile-compiled.js \
+		--js=lib/Model/IcingaFieldConverter.js \
+		--js=lib/View/Templates/Host.js \
+		--js=lib/View/Templates/Service.js \
+		--js=lib/Model/IcingaApiStore.js \
+		--js=lib/Model/IcingaApiDataView.js \
+		--js=lib/Model/IcingaConfiguration.js \
+		--js=lib/Model/IcingaCommandSender.js \
+		--js=lib/Model/IcingaMessageBus.js \
+		--js=lib/Model/Template/DetailParser.js \
+		--js=lib/View/Commands/Definitions.js \
+		--js=lib/View/GenericView.js \
+		--js=lib/View/ConfigView.js \
+		--js=lib/View/CommandSelectionView.js \
+		--js=lib/View/CommandDetailView.js \
+		--js=lib/View/Sheets/SortSheet.js \
+		--js=lib/View/Sheets/DetailSheet.js \
+		--js=lib/View/Dock/FilterToolBar.js \
+		--js=lib/View/Dock/PagerBottomBar.js \
+		--js=lib/index.js \
+		--externs=lib/sencha/ext-touch-debug.js \
+		--externs=bin/closure/icingaTouchExtern.js
+
+
+install:
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)/deploy
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)/icons
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)/icons/fugue
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)/src
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)/lib
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)/lib/sencha
+		$(INSTALL) -m 775 $(INSTALL_OPTS) -d $(DESTDIR)$(HTMLDIR)/src/css
+		$(INSTALL) -m 775 $(INSTALL_OPTS) index.html $(DESTDIR)$(HTMLDIR)/index.html
+		$(INSTALL) -m 775 $(INSTALL_OPTS) lib/sencha/ext-touch.js $(DESTDIR)$(HTMLDIR)/lib/sencha/ext-touch.js
+		$(INSTALL) -m 664 $(INSTALL_OPTS) deploy/IcingaMobile-compiled.js $(DESTDIR)$(HTMLDIR)/deploy/IcingaMobile-compiled.js
+		for file in icons/*; \
+		do $(INSTALL) -m 644 $(INSTALL_OPTS) $$file $(DESTDIR)$(HTMLDIR)/icons; done
+		for file in icons/fugue/*.png; \
+		do $(INSTALL) -m 644 $(INSTALL_OPTS) $$file $(DESTDIR)$(HTMLDIR)/icons/fugue; done
+		for file in src/css/*.css; \
+		do $(INSTALL) -m 644 $(INSTALL_OPTS) $$file $(DESTDIR)$(HTMLDIR)/src/css; done
+
+install-apache-config:
+	${INSTALL} -b -m 664 $(INSTALL_OPTS) etc/apache/icinga-mobile.conf $(DESTDIR)$(WEB_APACHE_PATH)/conf.d/icinga-mobile.conf
+	@printf "\nInstalled configuration in '%s'.\n" "$(WEB_APACHE_PATH)"
+	@printf "Please make sure that the directory is included or \n"
+	@printf "include %s/icinga-mobile.conf manually.\n" "$(WEB_APACHE_PATH)"
+	@printf "\nPlease restart your apache in order to complete this step.\n\n"

@@ -1,0 +1,192 @@
+// Tab icons used with permission from Drew Wilson
+// http://pictos.drewwilson.com/
+// Pictos icons are (c) 2010 Drew Wilson
+
+@import '../global';
+
+$include_tab_bookmarks_icon: $include_all_icons !default;
+$include_tab_download_icon: $include_all_icons !default;
+$include_tab_favorites_icon: $include_all_icons !default;
+$include_tab_info_icon: $include_all_icons !default;
+$include_tab_more_icon: $include_all_icons !default;
+$include_tab_search_icon: $include_all_icons !default;
+$include_tab_time_icon: $include_all_icons !default;
+$include_tab_user_icon: $include_all_icons !default;
+$include_tab_team_icon: $include_all_icons !default;
+$include_tab_settings_icon: $include_all_icons !default;
+
+$top_tab_height: 43px;
+$edgewidth: 36px;
+$taboverlap: 15px;
+
+$bottom_tab_icon_size: 2em;
+
+@mixin tabbar_mask_icon($name) {
+  @if $name {
+    &.#{$name} {
+      -webkit-mask-box-image: theme_image($theme_name, "tabicons/" + $name + ".png");
+    }
+  }
+}
+
+@mixin sides($yoffset) {
+  &:before, &:after {
+    background-position-y: $yoffset * $top_tab_height;
+  }
+}
+
+@mixin sencha-top-tabs {
+  .x-tabbar.x-docked-top {
+    border-bottom: 5px solid #306aa1;
+
+    .x-panel-body {
+      padding: 0 $edgewidth - $taboverlap;
+    }
+
+    .x-tab {
+      margin: 5px $edgewidth - $taboverlap 0;
+      color: #295d8e;
+      font-size: 19px;
+      padding-top: 10px;
+      height: $top_tab_height;
+      text-shadow: #fff 0 1px 0;
+      overflow: visible;
+      position: relative;
+      background: theme_image($theme_name, "tabs.png") 0 -3*$top_tab_height repeat-x;
+
+      &:before, &:after {
+        content: "\00a0";
+        display: block;
+        position: absolute;
+        background: theme_image($theme_name, "tabs.png") 0 -2*$top_tab_height no-repeat;
+        width: $edgewidth;
+        height: $top_tab_height;
+        bottom: 0;
+      }
+      &::after {
+        background-position-x: -$edgewidth;
+        right: -$edgewidth;
+      }
+      &::before {
+        background-position: 0 -2 * $top_tab_height;
+        left: -$edgewidth;
+      }
+
+      &.x-tab-active, &.x-tab-active.x-tab-pressed {
+        color: #fff;
+        text-shadow: #000 0 -1px 0;
+        z-index: 1;
+        background-position-y: -1*$top_tab_height;
+        @include sides(0);
+      }
+
+      &.x-tab-pressed {
+        background-position-y: -7*$top_tab_height;
+        @include sides(-6);
+      }
+    }
+
+    &.x-tabbar-dark {
+      border-color: #242e38;
+    }
+    &.x-tabbar-dark .x-tab-active.x-tab-pressed, &.x-tabbar-dark .x-tab-active {
+      background-position-y: -5*$top_tab_height;
+      @include sides(-4);
+      z-index: 2;
+    }
+  }
+}
+
+@mixin sencha-bottom-tabs {
+  .x-tabbar.x-docked-bottom {
+    @include bg_gradient(darken($base_color, 50%), 'matte');
+    border-top: 1px solid darken($base_color, 30%);
+
+    .x-tab {
+      @include border-radius(.2em);
+      margin: .2em .15em;
+      text-align: center;
+      width: $bottom_tab_icon_size + 1.2em;
+      height: $bottom_tab_icon_size + .9em;
+      text-shadow: #000 0 1px 0;
+      color: lighten($base_color, 20%);
+      padding: $bottom_tab_icon_size - .4em .2em 0;
+      font-weight: bold;
+      position: relative;
+
+      span.x-button-label {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        font-size: 9px;
+        display: inline-block;
+        font-weight: bold;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      img {
+        width: $bottom_tab_icon_size;
+        height: $bottom_tab_icon_size;
+        @include bg_gradient(darken($base_color, 7%));
+        display: block;
+        position: absolute;
+        top: .15em;
+        left: .6em;
+        -webkit-box-shadow: #000 0 1px 0px;
+
+        text-shadow: #000 0 1px 0px;
+
+        @if $include_all_icons {
+          @if $include_tab_bookmarks_icon { @include tabbar_mask_icon('bookmarks'); }
+          @if $include_tab_download_icon { @include tabbar_mask_icon('download'); }
+          @if $include_tab_favorites_icon { @include tabbar_mask_icon('favorites'); }
+          @if $include_tab_info_icon { @include tabbar_mask_icon('info'); }
+          @if $include_tab_more_icon { @include tabbar_mask_icon('more'); }
+          @if $include_tab_search_icon { @include tabbar_mask_icon('search'); }
+          @if $include_tab_time_icon { @include tabbar_mask_icon('time'); }
+          @if $include_tab_user_icon { @include tabbar_mask_icon('user'); }
+          @if $include_tab_team_icon { @include tabbar_mask_icon('team'); }
+          @if $include_tab_settings_icon { @include tabbar_mask_icon('settings'); }
+        }
+      }
+
+      &.x-tab-active {
+        @include bg_gradient(darken($base_color, 35%), 'glossy');
+        color: #fff;
+        img {
+          @include bg_gradient(saturate(lighten($active_color, 10%), 50%), 'glossy');
+        }
+      }
+    }
+
+    &.x-tabbar-light {
+      @include bg_gradient(desaturate(lighten($base_color, 0%), 10%), 'matte');
+      border-top-color: $base_color;
+
+      .x-tab {
+        color: darken($base_color, 20%);
+        text-shadow: lighten($base_color, 5%) 0 1px 0;
+
+        img {
+          @include bg_gradient(darken($base_color, 20%));
+        }
+
+        &.x-tab-active {
+          @include bg_gradient(desaturate(lighten($base_color, 20%), 10%), 'glossy');
+          text-shadow: lighten($base_color, 30%) 0 1px 0;
+
+          img {
+            @include bg_gradient(darken(saturate($active_color, 50%), 10%), 'glossy');
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin sencha-tabs {
+  @include sencha-top-tabs;
+  @include sencha-bottom-tabs;
+}

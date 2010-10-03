@@ -1,0 +1,195 @@
+/* 
+    Document   : iconset
+    Created on : 17.09.2010, 14:26:30
+    Author     : jmosshammer
+    Description:
+        Icons for icinga mobile.
+		We use the Fugue Icons from Yusuke Kamiyamane
+		http://code.google.com/p/fugue-icons-src/
+
+*/
+
+/*
+Field for nested icons (mainly to show if something is enabled or disabled
+*/
+div.icinga-iconField {
+	
+	float:left;
+	margin-top:3px;
+	margin-left:3px;
+	padding:1px;
+	height:20px;
+	padding-left:18px;
+	background-repeat:no-repeat;
+	background-position: 0px 2px;
+	width:50px;
+	border-right: 1px solid #acacac;
+}
+div.icinga-iconField-wrap {
+	min-width:170px;
+	white-space:nowrap;
+}
+.icinga-icon {
+	width:25px;
+	height: 18px;
+	background-repeat:no-repeat;
+	background-position: 7px 1px;
+}
+
+div.icinga-iconField.activeChecks {
+	background-image: url('../../icons/fugue/arrow-out.png');
+}
+
+div.icinga-iconField.passiveChecks {
+	background-image: url('../../icons/fugue/arrow-in.png');
+}
+
+div.icinga-iconField.notifications {
+	background-image: url('../../icons/fugue/speaker-volume.png');
+
+}
+
+
+.icinga-icon.enabled {
+	background-image: url('../../icons/fugue/tick-circle-frame.png');
+	display:inline;
+	float:left;
+}
+
+.icinga-icon.disabled {
+	background-image: url('../../icons/fugue/cross-circle-frame.png');
+	display:inline;
+	float:left;
+}
+
+.icinga-icon.info {
+	background-image: url('../../icons/fugue/question-white.png');
+	display:inline;
+	float:right
+}
+
+
+.icinga-btn-ok {
+	height:25px;
+	width: 25px;
+	background-image: url('../../icons/fugue/tick.png');
+	display:inline;
+	float:left;
+	background-repeat:no-repeat;
+	background-position: 0px 2px;
+}
+
+.icinga-btn-warning {
+	height:16px;
+	width: 25px;
+	background-image: url('../../icons/fugue/exclamation.png');
+	display:inline;
+	float:left;
+	background-repeat:no-repeat;
+	background-position: 0px 2px;
+}
+
+.icinga-btn-critical {
+	height:16px;
+	width: 25px;
+	background-image: url('../../icons/fugue/cross.png');
+	display:inline;
+	float:left;
+	background-repeat:no-repeat;
+	background-position: 0px 2px;
+}
+
+.icinga-btn-unknown {
+	height:16px;
+	width: 16px;
+	background-image: url('../../icons/fugue/question.png');
+	display:inline;
+	float:left;
+	background-repeat:no-repeat;
+	background-position: 0px 2px;
+}
+
+.icinga-btn-command {
+	height:16px;
+	width: 16px;
+	background-image: url('../../icons/fugue/cog.png');
+	display:inline;
+	float:left;
+	background-repeat:no-repeat;
+	background-position: 0px 2px;
+
+}
+
+.icinga-btn-excl {
+	height:16px;
+	width: 16px;
+	background-image: url('../../icons/fugue/exclamation.png');
+	display:inline;
+	float:left;
+	background-repeat:no-repeat;
+	background-position: 0px 2px;
+
+}
+
+
+div.selCommand .label.icon-acknowledged {
+	background-image: url('../../icons/fugue/cog.png');
+}
+
+div.selCommand .label.icon-reschedule {
+	background-image: url('../../icons/fugue/alarm-clock-select.png');
+}
+
+div.selCommand .label.icon-downtime {
+	background-image: url('../../icons/fugue/contrast.png');
+}
+
+div.selCommand .label.icon-checkresult {
+	background-image: url('../../icons/fugue/arrow-circle-double.png');
+}
+
+div.selCommand .label.icon-comment{
+	background-image: url('../../icons/fugue/sticky-note--pencil.png');
+}
+
+div.selCommand .label.icon-disable-generic{
+	background-image: url('../../icons/fugue/cross.png');
+}
+
+div.selCommand .label.icon-passive{
+	background-image: url('../../icons/fugue/arrow-in.png');
+}
+
+div.selCommand .label.icon-active-checks{
+	background-image: url('../../icons/fugue/arrow-out.png');
+}
+
+div.selCommand .label.icon-stop {
+	background-image: url('../../icons/fugue/cross.png');
+}
+
+div.selCommand .label.icon-notify-enable {
+	background-image: url('../../icons/fugue/speaker-volume.png');
+}
+
+div.selCommand .label.icon-notify-disable {
+	background-image: url('../../icons/fugue/speaker-volume-control-mute.png');
+}
+
+div.selCommand .label.icon-notify{
+	background-image: url('../../icons/fugue/speaker-volume.png');
+}
+
+div.selCommand .label.icon-flap {
+	background-image: url('../../icons/fugue/arrow-switch.png');
+}
+
+div.selCommand .label.icon-generic {
+	background-image: url('../../icons/fugue/block.png');
+}
+
+
+
+
+
+
