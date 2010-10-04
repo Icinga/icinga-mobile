@@ -27,8 +27,9 @@ compile:
 		--js=lib/View/ConfigView.js \
 		--js=lib/View/CommandSelectionView.js \
 		--js=lib/View/CommandDetailView.js \
-		--js=lib/View/Sheets/SortSheet.js \
+		--js=lib/View/Sheets/SearchSheet.js \
 		--js=lib/View/Sheets/DetailSheet.js \
+		--js=lib/View/Sheets/SortSheet.js \
 		--js=lib/View/Dock/FilterToolBar.js \
 		--js=lib/View/Dock/PagerBottomBar.js \
 		--js=lib/index.js \
@@ -54,8 +55,9 @@ compile-debug:
 		--js=lib/View/ConfigView.js \
 		--js=lib/View/CommandSelectionView.js \
 		--js=lib/View/CommandDetailView.js \
-		--js=lib/View/Sheets/SortSheet.js \
+		--js=lib/View/Sheets/SearchSheet.js \
 		--js=lib/View/Sheets/DetailSheet.js \
+		--js=lib/View/Sheets/SortSheet.js \
 		--js=lib/View/Dock/FilterToolBar.js \
 		--js=lib/View/Dock/PagerBottomBar.js \
 		--js=lib/index.js \

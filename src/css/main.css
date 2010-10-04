@@ -25,6 +25,8 @@ body {
 
 .listing .infoField.selectedIcingaItem {
 	border: 1px solid red;
+	-moz-box-shadow: 55px 55px 55px #f00;
+	-webkit-box-shadow: 0px 0px 55px #f00;
 }
 
 .infoField.state_service_0, .infoField.state_host_0 {
@@ -164,6 +166,13 @@ div .x-icinga-grid-cell-inner {
 	overflow:hidden;
 	max-height:3em;
 	max-width: 90%;
+}
+
+div .config-qtips {
+	border-top:1px solid #8d999f;
+	border-left:1px solid #8d999f;
+	border-right:1px solid #8d999f;
+
 }
 
 .status_service_0, .status_host_0 {

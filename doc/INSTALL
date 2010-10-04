@@ -1,6 +1,8 @@
 Icinga mobile
 v.0.1.1 Installation Guide:
 
+INSTALLATION:
+
 Basic, without default credentials deployed:
 
 1) Type ./configure 
@@ -18,3 +20,23 @@ Advanced:
 - Run ./configure as described in 1)
 - Run make compile
 - Finally, run make install
+
+ICINGA WEB CONFIGURATION:
+
+1)	At %icinga_web%/app/modules/config/auth.xml get sure that you have the auth provider
+	auth_key enabled.
+
+2)	In the web interface, create a new user that will be used to access icinga.
+	- Choose auth_key as an auth provide
+	- Enter the api key you wish to use
+	- Add the appkit.api.access principal
+	- (Optional, if the user shouldn't be able to do everything): Add restriction principals if you want to.
+
+3)	Don't use the same key for more than one user
+
+
+ICINGA MOBILE CONFIGURATION:
+
+1) In the config dialog, enter the hostname and api key of the user.
+
+2) Enjoy icinga-mobile

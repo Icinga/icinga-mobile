@@ -5,7 +5,7 @@
 Alias @web_path@ @prefix@/
 
 <Directory @prefix@/>
-	DirectoryIndex index.php
+	DirectoryIndex index.html
 	Options FollowSymLinks
 	AllowOverride all
 	Order allow,deny
