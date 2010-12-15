@@ -85,7 +85,7 @@ install:
 		do $(INSTALL) -m 644 $(INSTALL_OPTS) $$file $(DESTDIR)$(HTMLDIR)/src/css; done
 
 install-apache-config:
-	${INSTALL} -b -m 664 $(INSTALL_OPTS) etc/apache/icinga-mobile.conf $(DESTDIR)$(WEB_APACHE_PATH)/conf.d/icinga-mobile.conf
+	${INSTALL} -b -m 664 $(INSTALL_OPTS) etc/apache/icinga-mobile.conf $(DESTDIR)$(WEB_APACHE_PATH)/icinga-mobile.conf
 	@printf "\nInstalled configuration in '%s'.\n" "$(WEB_APACHE_PATH)"
 	@printf "Please make sure that the directory is included or \n"
 	@printf "include %s/icinga-mobile.conf manually.\n" "$(WEB_APACHE_PATH)"
