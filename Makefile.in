@@ -8,6 +8,14 @@ WEB_APACHE_PATH=@web_apache_path@
 INSTALL=@INSTALL@
 INSTALL_OPTS=@INSTALL_OPTS@
 
+help: 
+	@printf "\t%-22s - %s\n" "" ""
+	@printf "Please supply a command line argument (i.e. 'make install').\n\n"
+	@printf "Generic targets: install, install-apache-config\n\n"
+	@printf "Developer targets (require java for the google closure compiler):\n"
+	@printf "\t compile \t compiles the js code to a compressed, optimized file \n"
+	@printf "\t compile-debug \t compiles the js code to a uncompressed, readable file \n"
+
 compile:
 	java -jar bin/closure/compiler.jar \
 		--warning_level=QUIET \
