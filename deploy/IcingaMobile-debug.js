@@ -101,7 +101,7 @@ Icinga.Mobile.View.Templates.Host = {
 			'label' : 'Host name',
 			'field' : 'HOST_NAME'
 		},{
-			'label' : 'Adress',
+			'label' : 'Address',
 			'field' : 'HOST_ADDRESS'
 		},{
 			'label' : 'State',
