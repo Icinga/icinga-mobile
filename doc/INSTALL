@@ -1,30 +1,76 @@
 Icinga mobile
-v.0.1.1 Installation Guide:
+v.0.2.0 Installation Guide:
 
 INSTALLATION:
 
 Basic, without default credentials deployed:
 
-1) Type ./configure 
+1) Use ./configure
 		--with-web-user=(Your web user)
 		--with-web-group=(your web group)
 		--with-web-apache-path=(your apache path)
 		--prefix=(Where to install to, default /usr/local/icinga-mobile)
+
 2) Run make install
+
+RHEL based
+
+# ./configure \
+    --with-web-user=apache
+    --with-web-group=apache
+    --with-web-apache-path=/etc/httpd
+    --prefix=/usr/local/icinga-mobile (default Installation path)
+
+# make install
+# make install-apache-config
+# service httpd restart
+
+Debian based
+
+# ./configure \
+    --with-web-user=www-data (apache user)
+    --with-web-group=www-data (apache group)
+    --with-web-apache-path=/etc/apache2/conf.d (apache configuration files path)
+    --prefix=/usr/local/icinga-mobile (default Installation path)
+
+# make install
+# make install-apache-config
+# service apache2 restart
 
 Advanced:
 
 1. Change default credentials:
 - Make sure you have a sun java version installed, this is needed in order to recompile the sourcecode via the google closure compiler.
 - In lib/Model/IcingaConfiguration.js change the 'icinga_apikey' and 'icinga_url' entries to the value you want
+
+# vim lib/Model/IcingaConfiguration.js
+
+                var cfg_defaults = {
+                        'hasSetup' : 'true',
+                        'defaultViewTpl': 'pregnancyTest',
+                        'icinga_apikey' : 'auth1234',
+                        'icinga_url' : 'http://mobile.demo.icinga.org/interface/',
+                        'noStartup' : 'false'
+                }
+
 - Run ./configure as described in 1)
 - Run make compile
 - Finally, run make install
+- Restart apache
+
 
 ICINGA WEB CONFIGURATION:
 
-1)	At %icinga_web%/app/modules/config/auth.xml get sure that you have the auth provider
-	auth_key enabled.
+1)	Make sure that you have the auth provider 'auth_key' enabled in %icinga_web%/app/modules/config/auth.xml
+
+$ vim /usr/local/icinga-web/app/modules/AppKit/config/auth.xml
+
+                <ae:parameter name="auth_key">
+                        <ae:parameter name="auth_module">AppKit</ae:parameter>
+                        <ae:parameter name="auth_provider">Auth.Provider.AuthKey</ae:parameter>
+                        <ae:parameter name="auth_enable">true</ae:parameter>
+                        <ae:parameter name="auth_authoritative">true</ae:parameter>
+                </ae:parameter>
 
 2)	In the web interface, create a new user that will be used to access icinga.
 	- Choose auth_key as an auth provide
